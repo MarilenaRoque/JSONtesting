@@ -36,7 +36,7 @@
 
     // Defining the type of response the request should receive
     // it will be converted on JS objects automatically
-    request.responseType = 'json';
+    request.responseType = 'text';
 
     // Send the request
     request.send();
@@ -91,10 +91,10 @@
     // it will make sure that the response will be available before deal with it
     request.onload = function() {
         // the response for the request can be find on .response attribute of the request
-        const superHeroes = request.response;
+        const superHeroesText = request.response;
+        const superHeroes = JSON.parse(superHeroesText);
         populateHeader(superHeroes);
         showHeroes(superHeroes);
-        console.log(superHeroes);
     }
 
   
