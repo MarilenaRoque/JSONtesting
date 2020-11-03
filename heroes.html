@@ -1,0 +1,55 @@
+<!-- JSON TUTORIAL FROM ORIGINAL DOCUMENTATION -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    <script>
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+
+    // Retrieving the URL of the JSON file
+    let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+    // Creating new XMLHttpRequest
+    let request = new XMLHttpRequest();
+    
+    // Oppenning the resquest
+    request.open('GET', requestURL);
+
+    // Defining the type of response the request should receive
+    // it will be converted on JS objects automatically
+    request.responseType = 'json';
+
+    // Send the request
+    request.send();
+
+    // onload is the function called when a trasaction is completed succssfully
+    // it will make sure that the response will be available before deal with it
+    request.onload = function() {
+        // the response for the request can be find on .response attribute of the request
+        const superHeroes = request.response;
+        // populateHeader(superHeroes);
+        // showHeroes(superHeroes);
+        console.log(superHeroes);
+    }
+    
+    </script>
+  </body>
