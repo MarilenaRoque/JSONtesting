@@ -6,16 +6,26 @@
 </head>
 <body>
   <img src="#" />
+  <br>
+  <button> New Image </button>
   <script>
   </script>
 </body>
 </html>
 <script>
     const img = document.querySelector('img');
-    fetch('https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=cold', {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      img.src = response.data.images.original.url;
-    });
+    const button = document.querySelector('button');
+
+    const getImage = () =>{
+        fetch('https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=fun', {mode: 'cors'})
+        .then(function(response) {
+        return response.json();
+        }).then(function(response) {
+        img.src = response.data.images.original.url;
+        });
+    
+    }
+
+    button.addEventListener("click", getImage);
+    getImage();
 </script>
