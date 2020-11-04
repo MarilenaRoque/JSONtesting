@@ -7,6 +7,7 @@
 <body>
   <img src="#" />
   <br>
+  <input type='text' id='keyword'>
   <button> New Image </button>
   <script>
   </script>
@@ -16,16 +17,24 @@
     const img = document.querySelector('img');
     const button = document.querySelector('button');
 
-    const getImage = () =>{
-        fetch('https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=fun', {mode: 'cors'})
+    const getImage = (keyword) =>{
+        
+        fetch(`https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=${keyword}`, {mode: 'cors'})
         .then(function(response) {
         return response.json();
         }).then(function(response) {
         img.src = response.data.images.original.url;
-        });
-    
+        }).catch(function (){
+            img.src = 'https://img.ibxk.com.br/2018/06/22/gif-22163357233543.gif';
+        })
     }
 
-    button.addEventListener("click", getImage);
-    getImage();
+    const searchImage = () => {
+        const keyword = document.querySelector('input').value;
+        getImage(keyword);
+    }
+    
+
+    button.addEventListener("click", searchImage);
+    getImage("dog");
 </script>
