@@ -26,15 +26,33 @@ function refreshScore(url) {
 }
 
 function addScore(url) {
-
-    console.log(`Adding Score!${url}`)
+    const name = document.getElementById('name').value;
+    const score = document.getElementById('score').value;
+    console.log(name, score)
+    const body = JSON.stringify({ 
+        "user": name,
+        "score": score
+    });
+    let promiseAddScore = fetch(url, {
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: body
+    })
+    promiseAddScore.then( function (response) {
+        return response.json();
+    }).then(function(response) {
+        console.log(response.result)
+    })
 }
 
 
 const idGame = setGame(name);
 
 idGame.then(function (id) {
-    return `https://us-central1-js-capstone-backend.cloudfunctions.net/api/${id}/scores/`
+    return `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`
 }).then(function(url) {
     document.addEventListener('click', (e) => {
         if (e.target && e.target.id === 'refresh') {
