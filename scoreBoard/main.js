@@ -22,7 +22,14 @@ const setGame = (name) => {
 }
 
 function refreshScore(url) {
-    console.log(`refreshing!!!${url}`)
+    let promiseRefreshScore = fetch(url, {
+        mode: 'cors'
+    })
+    promiseRefreshScore.then( function (response) {
+        return response.json();
+    }).then(function(response) {
+        console.log(response.result)
+    })
 }
 
 function addScore(url) {
