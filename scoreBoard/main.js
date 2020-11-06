@@ -21,16 +21,37 @@ const setGame = (name) => {
     return p
 }
 
+function refreshScore(url) {
+    console.log(`refreshing!!!${url}`)
+}
 
-// const scoreList = () => {
+function addScore(url) {
 
-// }
+    console.log(`Adding Score!${url}`)
+}
 
-// const idGame = setGame(name);
 
-// idGame.then(function (response) {
-//     console.log(response)
-// })
+const idGame = setGame(name);
+
+idGame.then(function (id) {
+    return `https://us-central1-js-capstone-backend.cloudfunctions.net/api/${id}/scores/`
+}).then(function(url) {
+    document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'refresh') {
+            refreshScore(url);
+        } else if (e.target && e.target.id === 'newScore') {
+            addScore(url);
+        }
+    });
+});
+
+
+
+
+
+
+
+
 
 
 
