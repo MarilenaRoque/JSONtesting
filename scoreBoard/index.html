@@ -3,24 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Board Score</title>
+    <style>
+      .content {
+        width: 50%;
+        margin: 50px auto;
+      }
+    </style>
     
   </head>
   <body>
+    <div class="content">
 
-    <h1>/----/ Score Board /-----/</h1>
+      <h1>/----/ Score Board /-----/</h1>
 
-    
-    <button id="refresh">Refresh Scores</button></br>
-    <p id="scores"></p></br>
+      <form id = "new-score-form"></form>
+      <laber for="name">Player:</laber><br>
+      <input type="text" id="name"></br></br>
+      <laber for="score">Score:</laber><br>
+      <input type="number" id="score"></br></br>
+
+      <button id="newScore">Create new Score</button></br>
+
+
     </br>
     </br>
-    </br>
 
-  <form id = "new-score-form"></form>
-    <input type="text" id="name"></br></br>
-    <input type="number" id="score"></br></br>
+      <button id="refresh">Refresh Scores</button></br>
+      <div id="scores-table">
+        
 
-    <button id="newScore">Create new Score</button></br>
+      </div>
+
+      
+  </div>
 
 
 

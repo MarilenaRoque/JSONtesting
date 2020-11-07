@@ -1,4 +1,6 @@
 
+const scoreTable = document.createElement('div');
+
 const name = JSON.stringify({ 
 	"name": "My cool new game" 
 });
@@ -21,6 +23,22 @@ const setGame = (name) => {
     return p
 }
 
+
+function setItem (item) {
+    const paragraph = document.createElement('p');
+    paragraph.innerText = `${item.user} : ${item.score}`;
+    scoreTable.appendChild(paragraph);
+}
+
+
+function displayScores (result) {
+    const scoresDiv = document.getElementById('scores-table');
+    scoreTable.innerHTML = '';
+    scoresDiv.innerHTML = '';
+    result.forEach(setItem);
+    scoresDiv.appendChild(scoreTable);
+}
+
 function refreshScore(url) {
     let promiseRefreshScore = fetch(url, {
         mode: 'cors'
@@ -28,14 +46,13 @@ function refreshScore(url) {
     promiseRefreshScore.then( function (response) {
         return response.json();
     }).then(function(response) {
-        console.log(response.result)
+        displayScores(response.result);
     })
 }
 
 function addScore(url) {
     const name = document.getElementById('name').value;
     const score = document.getElementById('score').value;
-    console.log(name, score)
     const body = JSON.stringify({ 
         "user": name,
         "score": score
@@ -50,9 +67,10 @@ function addScore(url) {
     })
     promiseAddScore.then( function (response) {
         return response.json();
-    }).then(function(response) {
-        console.log(response.result)
-    })
+    }).then(function () {
+        refreshScore(url);
+    }
+    )
 }
 
 
@@ -66,6 +84,7 @@ idGame.then(function (id) {
             refreshScore(url);
         } else if (e.target && e.target.id === 'newScore') {
             addScore(url);
+
         }
     });
 });
