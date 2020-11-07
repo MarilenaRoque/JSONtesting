@@ -17,17 +17,27 @@
     const img = document.querySelector('img');
     const button = document.querySelector('button');
 
-    const getImage = (keyword) =>{
+    // const getImage = (keyword) =>{
         
-        fetch(`https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=${keyword}`, {mode: 'cors'})
-        .then(function(response) {
-        return response.json();
-        }).then(function(response) {
-        img.src = response.data.images.original.url;
-        }).catch(function (){
-            img.src = 'https://img.ibxk.com.br/2018/06/22/gif-22163357233543.gif';
-        })
+    //     fetch(`https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=${keyword}`, {mode: 'cors'})
+    //     .then(function(response) {
+    //     return response.json();
+    //     }).then(function(response) {
+    //     img.src = response.data.images.original.url;
+    //     }).catch(function (){
+    //         img.src = 'https://img.ibxk.com.br/2018/06/22/gif-22163357233543.gif';
+    //     })
+    // }
+
+    async function getImage(keyword) {
+      const rep = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=HAQg4iFZ5mRlbIg5CqV26wNwNH1Thp91&s=${keyword}`, {mode: 'cors'})
+      const response = await rep.json()
+      img.src = response.data.images.original.url;
     }
+
+    getImage().catch(function () {
+      img.src = 'https://img.ibxk.com.br/2018/06/22/gif-22163357233543.gif';
+    })
 
     const searchImage = () => {
         const keyword = document.querySelector('input').value;
@@ -37,4 +47,5 @@
 
     button.addEventListener("click", searchImage);
     getImage("dog");
+    
 </script>
